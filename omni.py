@@ -1,4 +1,5 @@
 from main_module import *
+from commands import _CommandError
 from secrets import token
 import discord
 
@@ -25,7 +26,7 @@ async def on_message(message: discord.message):
             try:
                 command, message.content = main_module.get_command(message.content)
                 response = command.execute(message)
-            except CommandError as e:
+            except _CommandError as e:
                 response = e.get_message() + "\n Use '" + prefix + "help' for more information"
             await message.channel.send(response)
 

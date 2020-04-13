@@ -38,10 +38,11 @@ def help_message(message):
                get_prefix(message.guild) + "help <command name>' for more information on a specific command.\n```" + \
                command.get_help() + '```'
 
-    return command.get_help()
+    return '```' + get_prefix(message.guild) + command.get_help() + '```'
 
 
-__help_command = Command('help', 'displays help messages', ['Vincent'], help_message)
+_help_argument = Argument('command', 'the command you want information on', optional=True)
+__help_command = Command('help', 'displays help messages', ['Vincent'], help_message, arguments=[_help_argument])
 main_module = CommandModule('Omni', 'Multi-purpose discord bot', [], {})
 main_module.add_command(__help_command)
 __load_modules('command_modules')
